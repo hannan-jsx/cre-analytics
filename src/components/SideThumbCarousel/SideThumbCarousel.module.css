@@ -1,0 +1,59 @@
+.SwiperWrapper {
+  display: grid;
+  gap: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.horizontal {
+  grid-template-rows: 1fr 120px;
+  height: 700px;
+}
+.vertical {
+  grid-template-columns: 1fr 150px;
+  height: 500px;
+}
+.mainSwiper {
+  height: 100%;
+  width: 100%;
+  padding-bottom: 0 !important;
+}
+
+.swiperThumbs {
+  height: 100%;
+  width: 100%;
+  padding-bottom: 0 !important;
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1/1;
+  z-index: 3;
+  position: relative;
+}
+.content::before {
+  content: "";
+  background-color: #00000094;
+  z-index: 2;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  opacity: 0.1;
+}
+.content img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 768px) {
+  .SwiperWrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr clamp(100px, 25vw + 1rem, calc(100% / 4));
+  }
+}
