@@ -85,7 +85,7 @@
   isolation: isolate;
 }
 .tableRow::before {
-  content: "";
+  content: '';
 
   position: absolute;
   inset: 0;
@@ -110,6 +110,7 @@
 .tableData {
   padding: 0.8rem 0.8rem;
   font-size: var(--fs-base);
+  white-space: nowrap;
 }
 
 .tableData {
