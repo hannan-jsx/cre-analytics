@@ -1,5 +1,5 @@
 [build]
-  command = "npm run winBuild"
+  command = "npm install --legacy-peer-deps && npm run winBuild"
   publish = "build"
   environment = { CI = "false" }
 
