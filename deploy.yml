@@ -20,9 +20,19 @@ jobs:
         with:
           node-version: '18.x' # Choose your preferred Node.js version
 
+      # Cache node_modules to speed up builds
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
       # Install dependencies
       - name: Install dependencies
-        run: npm i --f
+        run: npm install --force
+        # --force is used to bypass any potential issues with package-lock.json
 
       # Run build script
       - name: Build
