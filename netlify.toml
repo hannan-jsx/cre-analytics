@@ -1,9 +1,0 @@
-[build]
-  command = "npm install --legacy-peer-deps && npm install typescript --save-dev && npm install @babel/plugin-proposal-private-property-in-object --save-dev && npm run winBuild"
-  publish = "build"
-  environment = { CI = "false" }
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
