@@ -72,7 +72,7 @@
   "scripts": {
     "start": "craco start",
     "build": "GENERATE_SOURCEMAP=false craco build",
-    "winBuild": "set \"DISABLE_ESLINT_PLUGIN=true\" && set \"GENERATE_SOURCEMAP=false\" && craco build",
+"winBuild": "cross-env DISABLE_ESLINT_PLUGIN=true GENERATE_SOURCEMAP=false craco build",
     "test": "craco test",
     "eject": "craco eject"
   },
@@ -95,6 +95,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "react-scripts": "^5.0.1",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1"
