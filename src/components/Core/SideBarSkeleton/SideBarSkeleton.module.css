@@ -3,6 +3,7 @@
   /* padding: 1rem; */
   display: flex;
   flex-wrap: wrap;
+  background-color: red;
 }
 
 .pageMain {
