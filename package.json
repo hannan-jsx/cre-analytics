@@ -44,7 +44,6 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.3.5",
     "react-icons": "^4.4.0",
-    "react-image-lightbox": "^5.1.4",
     "react-modern-drawer": "^1.1.2",
     "react-otp-input": "^3.1.1",
     "react-phone-input-2": "^2.15.1",
