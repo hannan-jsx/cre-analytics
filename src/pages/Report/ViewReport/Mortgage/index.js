@@ -109,6 +109,7 @@ const Mortgage = ({ id }) => {
           feesAndCosts: `$${formatNumber(item?.feesAndCosts)}`,
           refinancePMT: `$${formatNumber(item?.refinancePMT)}`,
           value: `$${formatNumber(item?.value)}`,
+          capRate: (item?.capRate * 100).toFixed(2) + '%',
         }))}
         customStyle={{ height: '250px' }}
         page={false}
@@ -151,6 +152,7 @@ const tableHeaders = [
   { label: 'Mortgage', value: 'mortgage' },
   { label: 'Value', value: 'value' },
   { label: 'Capital Lift', value: 'capitalLift' },
+  { label: 'Cap Rate', value: 'capRate' },
   { label: 'Fees & Costs', value: 'feesAndCosts' },
   { label: 'Refinance PMT', value: 'refinancePMT' },
 ];

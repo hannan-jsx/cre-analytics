@@ -242,6 +242,76 @@ const AddEditReport = ({ id, setActiveTab }) => {
     }
     setLoading(false);
   };
+
+  const handleResetAll = () => {
+    // Property Info
+
+    setName('');
+    setLocation('');
+    setAskingPrice('');
+    setOfferPerc('');
+    setNoi('');
+    setAnnualNoiIncrease('');
+
+    // Loan terms
+
+    setFinancingLtvPerc('');
+    setLoanAnnualIntr('');
+    setLoanTermsInyear('');
+    setNumberMonthsIntrOnly('');
+    setFirstMonthPrincipalAndIntrPayment('');
+
+    // Deal Costs and Reserve
+
+    setDynamicFieldOne('');
+    setReservedDynamicFieldOne('');
+    setDynamicFieldTwo('');
+    setReservedDynamicFieldTwo('');
+
+    // Investor Terms
+
+    setPreferredAnnReturnPerc('');
+    setWaterfallShare('');
+
+    // Syndi Fees
+
+    setSyndiOriginationFee('');
+    setSyndiAumAnnFee('');
+    setPropertyManagerFee('');
+    setSyndiSalePriceFee('');
+    setTransactionAndBankFee('');
+    setRealtorFee('');
+
+    // Occupancy ,Yearly Projections
+
+    setOccupancy1('');
+    setOccupancy2('');
+    setOccupancy3('');
+    setOccupancy4('');
+    setOccupancy5('');
+    setOccupancy6('');
+    setOccupancy7('');
+    setOccupancy8('');
+    setOccupancy9('');
+    setOccupancy10('');
+
+    //Cap rates
+
+    setPurchaseCapRate('');
+    setYear5CapRate('');
+    setYear7CapRate('');
+    setYear10CapRate('');
+
+    //  Refinance Timing (in Months)
+
+    setRefinance37rate('');
+    setRefinance37Term('');
+    setRefinance49rate('');
+    setRefinance49Term('');
+    setRefinance61rate('');
+    setRefinance61Term('');
+  };
+
   useEffect(() => {
     setDynamicFieldOne(reserved_dynamic_field_one);
   }, [reserved_dynamic_field_one]);
@@ -612,7 +682,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
         <h3 className={classes.header}>Cap rates</h3>
         <div className={classes.input__wrapper}>
           <Input
-            value={purchase_cap_rate.toFixed(2)}
+            value={purchase_cap_rate ? purchase_cap_rate?.toFixed(2) : 0}
             setter={setPurchaseCapRate}
             label={'Purchase Capitalization Rate (%)'}
             placeholder='Enter CAP rate used for purchase valuation'
@@ -690,7 +760,12 @@ const AddEditReport = ({ id, setActiveTab }) => {
           />
         </div>
       </div>
-      <Button label={id ? 'Update' : 'Create'} onClick={handleSubmit} />
+      <div className={classes.button_container}>
+        <Button label='Reset short' variant='bordered' />
+        <Button label='Reset 22' variant='bordered' />
+        <Button label='Reset All' variant='bordered' onClick={handleResetAll} />
+        <Button label={id ? 'Update' : 'Create'} onClick={handleSubmit} />
+      </div>
     </div>
   );
 };

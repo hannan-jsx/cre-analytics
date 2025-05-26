@@ -120,6 +120,24 @@ const Valuation = ({ id }) => {
         customStyle={{ height: '200px' }}
         page={false}
       />
+
+      <TableStructure
+        headerTitle={' Net Operating Income '}
+        tableHeaders={noiDataHeader}
+        isLoading={loading}
+        tableContent={data?.noiData?.map((item) => ({
+          ...item,
+          targetNoi: item?.targetNoi
+            ? '$' + formatNumber(item?.targetNoi)
+            : 'N/A',
+          realizedNoi: item?.realizedNoi
+            ? '$' + formatNumber(item?.realizedNoi)
+            : 'N/A',
+        }))}
+        customStyle={{ height: '470px' }}
+        page={false}
+      />
+
       {/* No Refinance Year 5 */}
       <div className={classes.exit_wrapper}>
         {loading ? (
@@ -147,8 +165,8 @@ const Valuation = ({ id }) => {
                 label={'Annualized Return (%)'}
                 value={
                   data?.noRefinanceYear5?.annualizedReturn
-                    ? '$' +
-                      formatNumber(data?.noRefinanceYear5?.annualizedReturn)
+                    ? formatNumber(data?.noRefinanceYear5?.annualizedReturn) +
+                      '%'
                     : 'N/A'
                 }
               />
@@ -156,8 +174,8 @@ const Valuation = ({ id }) => {
                 label={'Average Cash on Cash Return (%)'}
                 value={
                   data?.noRefinanceYear5?.averageCashOnCash
-                    ? '$' +
-                      formatNumber(data?.noRefinanceYear5?.averageCashOnCash)
+                    ? formatNumber(data?.noRefinanceYear5?.averageCashOnCash) +
+                      '%'
                     : 'N/A'
                 }
               />
@@ -253,8 +271,8 @@ const Valuation = ({ id }) => {
                 label={'Annualized Return (%)'}
                 value={
                   data?.noRefinanceYear7?.annualizedReturn
-                    ? '$' +
-                      formatNumber(data?.noRefinanceYear7?.annualizedReturn)
+                    ? formatNumber(data?.noRefinanceYear7?.annualizedReturn) +
+                      '%'
                     : 'N/A'
                 }
               />
@@ -262,8 +280,8 @@ const Valuation = ({ id }) => {
                 label={'Average Cash on Cash Return (%)'}
                 value={
                   data?.noRefinanceYear7?.averageCashOnCash
-                    ? '$' +
-                      formatNumber(data?.noRefinanceYear7?.averageCashOnCash)
+                    ? formatNumber(data?.noRefinanceYear7?.averageCashOnCash) +
+                      '%'
                     : 'N/A'
                 }
               />
@@ -362,8 +380,8 @@ const Valuation = ({ id }) => {
                 label={'Annualized Return (%)'}
                 value={
                   data?.noRefinanceYear10?.annualizedReturn
-                    ? '$' +
-                      formatNumber(data?.noRefinanceYear10?.annualizedReturn)
+                    ? formatNumber(data?.noRefinanceYear10?.annualizedReturn) +
+                      '%'
                     : 'N/A'
                 }
               />
@@ -371,8 +389,8 @@ const Valuation = ({ id }) => {
                 label={'Average Cash on Cash Return (%)'}
                 value={
                   data?.noRefinanceYear10?.averageCashOnCash
-                    ? '$' +
-                      formatNumber(data?.noRefinanceYear10?.averageCashOnCash)
+                    ? formatNumber(data?.noRefinanceYear10?.averageCashOnCash) +
+                      '%'
                     : 'N/A'
                 }
               />
@@ -733,5 +751,15 @@ const refinanceYear5_37month = [
   {
     label: 'Property Management Fee',
     value: 'propertyManagementFee',
+  },
+];
+const noiDataHeader = [
+  {
+    label: ' Target Noi ',
+    value: 'targetNoi',
+  },
+  {
+    label: ' Realized Noi',
+    value: 'realizedNoi',
   },
 ];

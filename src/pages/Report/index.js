@@ -74,7 +74,12 @@ const Report = () => {
         tableContent={data.map((item) => ({
           ...item,
           location: (
-            <a href={item?.location} target='_blank' rel='noreferrer'>
+            <a
+              href={item?.location}
+              className={classes.location}
+              target='_blank'
+              rel='noreferrer'
+            >
               {item?.location}
             </a>
           ),
