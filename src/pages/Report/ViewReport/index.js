@@ -6,6 +6,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import Mortgage from './Mortgage';
 import Valuation from './Valuation';
 import classes from './ViewReport.module.css';
+import Report from './Report';
 
 const ViewReport = () => {
   const { slug } = useParams();
@@ -18,6 +19,7 @@ const ViewReport = () => {
     input: AddEditReport,
     mortgage: Mortgage,
     valuation: Valuation,
+    report: Report,
   };
 
   const ActiveComponent = components[activeTab.value];
@@ -30,7 +32,7 @@ const ViewReport = () => {
         value={activeTab}
       />
       <div className={classes.report__wrapper}>
-        <ActiveComponent id={slug} data={null} setActiveTab={setActiveTab} />
+        <ActiveComponent id={slug} setActiveTab={setActiveTab} />
       </div>
     </SideBarSkeleton>
   );
@@ -49,5 +51,9 @@ const tabsOption = [
   {
     label: 'Valuation',
     value: 'valuation',
+  },
+  {
+    label: 'Report',
+    value: 'report',
   },
 ];
