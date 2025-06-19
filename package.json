@@ -30,6 +30,7 @@
     "font-awesome": "^4.7.0",
     "heic2any": "^0.0.4",
     "html-react-parser": "^3.0.15",
+    "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
     "moment": "^2.29.4",
     "papaparse": "^5.5.2",

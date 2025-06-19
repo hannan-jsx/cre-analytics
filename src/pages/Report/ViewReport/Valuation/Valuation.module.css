@@ -29,6 +29,7 @@
   font-family: var(--ff-primary-bold);
   font-size: 24px;
   margin: 1rem 0;
+  color: black;
 }
 .month {
   font-weight: bold;
