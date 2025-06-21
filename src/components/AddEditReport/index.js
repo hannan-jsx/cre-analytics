@@ -213,6 +213,11 @@ const AddEditReport = ({ id, setActiveTab }) => {
       refinance_61_term_years: Number(refinance_61_term_years),
     };
     for (let key in params) {
+      if (params[key] === 'number_months_intr_only') {
+        if (params[key] === 0) {
+          return true;
+        }
+      }
       if (!params[key]) {
         RenderToast({
           type: 'error',
@@ -310,6 +315,31 @@ const AddEditReport = ({ id, setActiveTab }) => {
     setRefinance49Term('');
     setRefinance61rate('');
     setRefinance61Term('');
+  };
+  const handleReset22 = () => {
+    setName('');
+    setLocation('');
+    setAskingPrice('');
+    setOfferPerc('');
+    setNoi('');
+    setAnnualNoiIncrease('');
+    setFinancingLtvPerc('');
+    setLoanAnnualIntr('');
+    setLoanTermsInyear('');
+    setNumberMonthsIntrOnly('');
+    setFirstMonthPrincipalAndIntrPayment('');
+    setDynamicFieldOne('');
+    setReservedDynamicFieldOne('');
+    setDynamicFieldTwo('');
+    setReservedDynamicFieldTwo('');
+  };
+  const handleResetShort = () => {
+    setName('');
+    setLocation('');
+    setAskingPrice('');
+    setOfferPerc('');
+    setNoi('');
+    setAnnualNoiIncrease('');
   };
 
   useEffect(() => {
@@ -761,8 +791,12 @@ const AddEditReport = ({ id, setActiveTab }) => {
         </div>
       </div>
       <div className={classes.button_container}>
-        <Button label='Reset short' variant='bordered' />
-        <Button label='Reset 22' variant='bordered' />
+        <Button
+          label='Reset short'
+          variant='bordered'
+          onClick={handleResetShort}
+        />
+        <Button label='Reset 22' variant='bordered' onClick={handleReset22} />
         <Button label='Reset All' variant='bordered' onClick={handleResetAll} />
         <Button label={id ? 'Update' : 'Create'} onClick={handleSubmit} />
       </div>

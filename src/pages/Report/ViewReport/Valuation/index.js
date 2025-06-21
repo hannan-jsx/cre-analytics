@@ -206,7 +206,7 @@ const Valuation = ({ id }) => {
                 label={"Total Return on Investment (%)"}
                 value={
                   data?.noRefinanceYear5?.totalReturn
-                    ? "$" + formatNumber(data?.noRefinanceYear5?.totalReturn)
+                    ? formatNumber(data?.noRefinanceYear5?.totalReturn) + "%"
                     : "N/A"
                 }
               />
@@ -312,7 +312,7 @@ const Valuation = ({ id }) => {
                 label={"Total Return on Investment (%)"}
                 value={
                   data?.noRefinanceYear7?.totalReturn
-                    ? "$" + formatNumber(data?.noRefinanceYear7?.totalReturn)
+                    ? formatNumber(data?.noRefinanceYear7?.totalReturn) + "%"
                     : "N/A"
                 }
               />
@@ -421,7 +421,7 @@ const Valuation = ({ id }) => {
                 label={"Total Return on Investment (%)"}
                 value={
                   data?.noRefinanceYear10?.totalReturn
-                    ? "$" + formatNumber(data?.noRefinanceYear10?.totalReturn)
+                    ? formatNumber(data?.noRefinanceYear10?.totalReturn) + "%"
                     : "N/A"
                 }
               />
@@ -536,8 +536,8 @@ const Valuation = ({ id }) => {
                 label={"Total Return on Investment (%)"}
                 value={
                   data?.refinanceYear5_37month?.totalReturn
-                    ? "$" +
-                      formatNumber(data?.refinanceYear5_37month?.totalReturn)
+                    ? formatNumber(data?.refinanceYear5_37month?.totalReturn) +
+                      "%"
                     : "N/A"
                 }
               />
@@ -653,8 +653,8 @@ const Valuation = ({ id }) => {
                 label={"Total Return on Investment (%)"}
                 value={
                   data?.refinanceYear7_37month?.totalReturn
-                    ? "$" +
-                      formatNumber(data?.refinanceYear7_37month?.totalReturn)
+                    ? formatNumber(data?.refinanceYear7_37month?.totalReturn) +
+                      "%"
                     : "N/A"
                 }
               />
@@ -770,8 +770,8 @@ const Valuation = ({ id }) => {
                 label={"Total Return on Investment (%)"}
                 value={
                   data?.refinanceYear7_49month?.totalReturn
-                    ? "$" +
-                      formatNumber(data?.refinanceYear7_49month?.totalReturn)
+                    ? formatNumber(data?.refinanceYear7_49month?.totalReturn) +
+                      "%"
                     : "N/A"
                 }
               />
@@ -887,8 +887,8 @@ const Valuation = ({ id }) => {
                 label={"Total Return on Investment (%)"}
                 value={
                   data?.refinanceYear10_37month?.totalReturn
-                    ? "$" +
-                      formatNumber(data?.refinanceYear10_37month?.totalReturn)
+                    ? formatNumber(data?.refinanceYear10_37month?.totalReturn) +
+                      "%"
                     : "N/A"
                 }
               />
@@ -1004,8 +1004,8 @@ const Valuation = ({ id }) => {
                 label={"Total Return on Investment (%)"}
                 value={
                   data?.refinanceYear10_month49?.totalReturn
-                    ? "$" +
-                      formatNumber(data?.refinanceYear10_month49?.totalReturn)
+                    ? formatNumber(data?.refinanceYear10_month49?.totalReturn) +
+                      "%"
                     : "N/A"
                 }
               />
@@ -1124,8 +1124,9 @@ const Valuation = ({ id }) => {
                   label={"Total Return on Investment (%)"}
                   value={
                     data?.refinanceYear10_month61?.totalReturn
-                      ? "$" +
-                        formatNumber(data?.refinanceYear10_month61?.totalReturn)
+                      ? formatNumber(
+                          data?.refinanceYear10_month61?.totalReturn
+                        ) + "%"
                       : "N/A"
                   }
                 />
