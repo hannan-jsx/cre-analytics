@@ -1,418 +1,213 @@
-export const managerTabOptions = [
-  {
-    label: "District Managers",
-    value: "active",
-  },
-  {
-    label: "District Managers Registration",
-    value: "registration-pending",
-  },
-  {
-    label: "Inactive",
-    value: "system-deactivated",
-  },
-];
-export const agentTabOptions = [
-  {
-    label: "Sales Agents",
-    value: "active",
-  },
-  {
-    label: "Agent Registration",
-    value: "registration-pending",
-  },
-  {
-    label: "Inactive",
-    value: "system-deactivated",
-  },
-];
-export const customerTabOptions = [
-  {
-    label: "Assigned Customers",
-    value: "active",
-  },
-  {
-    label: "Unassigned Customers",
-    value: "unassigned",
-  },
-  {
-    label: "Customer Registration",
-    value: "registration-pending",
-  },
-  {
-    label: "Inactive",
-    value: "system-deactivated",
-  },
-];
-export const categoryStatusOptions = [
-  {
-    label: "Active",
-    value: true,
-  },
-  {
-    label: "Inactive",
-    value: false,
-  },
-];
-export const orderStatusOptions = [
-  {
-    label: "Pending",
-    value: "pending",
-  },
-  {
-    label: "In Progress",
-    value: "in-progress",
-  },
-  {
-    label: "Completed",
-    value: "completed",
-  },
-  {
-    label: "Cancelled",
-    value: "cancelled",
-  },
-];
-export const orderTableHeaders = [
-  {
-    label: "Order Id",
-    value: "orderId",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
-  {
-    label: "Customer",
-    value: "customer",
+// mortgage
 
-    headerStyle: {
-      width: "20%",
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
-  {
-    label: "Order Date",
-    value: "createdAt",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
-  // {
-  //   label: "Delivery Date",
-  //   value: "deliveryDate",
-  //   headerStyle: {
-  //     textAlign: "left",
-  //   },
-  //   dataStyle: {
-  //     textAlign: "left",
-  //   },
-  // },
-  {
-    label: "Status",
-    value: "status",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
-  {
-    label: "Supplier Name",
-    value: "supplier",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
-  {
-    label: "",
-    value: "actions",
-  },
+export const mortgageTableHeaders = [
+  { label: 'Month', value: 'month' },
+  { label: 'Mortgage', value: 'mortgage' },
+  { label: 'Value', value: 'value' },
+  { label: 'Capital Lift', value: 'capitalLift' },
+  { label: 'Cap Rate', value: 'capRate' },
+  { label: 'Fees & Costs', value: 'feesAndCosts' },
+  { label: 'Refinance PMT', value: 'refinancePMT' },
 ];
-export const supplierHeaders = [
+
+export const mortgageTableHeader2 = [
   {
-    label: "Supplier",
-    value: "supplier",
-    headerStyle: {
-      textAlign: "left",
-    },
+    label: '',
+    value: 'sno',
     dataStyle: {
-      textAlign: "left",
+      width: '10%',
     },
   },
-  {
-    label: "Contact Number",
-    value: "phoneNo",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
-  {
-    label: "Shipping Address",
-    value: "address",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
-  {
-    label: "Product Amount",
-    value: "productAmount",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
-  {
-    label: "Shipment Amount",
-    value: "shipmentAmount",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
+  { label: 'Year1', value: 'year1' },
+  { label: 'Year2', value: 'year2' },
+  { label: 'Year3', value: 'year3' },
+  { label: 'Year4', value: 'year4' },
+  { label: 'Year5', value: 'year5' },
+  { label: 'Year6', value: 'year6' },
+  { label: 'Year7', value: 'year7' },
+  { label: 'Year8', value: 'year8' },
+  { label: 'Year9', value: 'year9' },
+  { label: 'Year10', value: 'year10' },
 ];
-export const orderDetailHeaders = [
+
+// generate Report
+
+export const generateReportSyndicatorsDealValuesTable = [
   {
-    value: "orderId",
-    label: "Order ID",
+    label: ' Year',
+    value: 'year',
   },
   {
-    value: "completionDate",
-    label: "Completion Date",
+    label: ' Anualized Total Value',
+    value: 'annualizedTotalValue',
   },
   {
-    value: "createdAt",
-    label: "Order Date",
+    label: ' Syndicator Acquisation',
+    value: 'syndicatorAcquisation',
   },
   {
-    value: "status",
-    label: "Order Status",
+    label: ' Syndication Exit',
+    value: 'syndicationExit',
+  },
+  {
+    label: ' AUM Fee',
+    value: 'syndicatorAumFee',
+  },
+  {
+    label: ' Gain Share',
+    value: 'gainShare',
+  },
+  {
+    label: '  Total Value ',
+    value: 'totalValue',
   },
 ];
 
-export const productsHeaders = [
+// valuation
+export const valuationsExitValuationHeader = [
   {
-    value: "sku",
-    label: "SKU ID",
+    label: 'Year',
+    value: 'year',
   },
   {
-    value: "name",
-    label: "Product Name",
+    label: 'Sale Price',
+    value: 'salePrice',
   },
   {
-    value: "quantity",
-    label: "Quantity",
+    label: 'Excess Capital Gains',
+    value: 'excessCapitalGains',
   },
   {
-    value: "price",
-    label: "Price",
+    label: 'GP Share',
+    value: 'gpShare',
   },
   {
-    value: "total",
-    label: "Total",
-  },
-];
-export const customerOrderHeaders = [
-  {
-    label: "Order Id",
-    value: "orderId",
-    headerStyle: { textAlign: "center" },
-    dataStyle: { textAlign: "center" },
+    label: 'LP Payment',
+    value: 'lpPayment',
   },
   {
-    label: "Total Products",
-    value: "products",
-    headerStyle: { textAlign: "center" },
-    dataStyle: { textAlign: "center" },
+    label: 'Net Proceeds',
+    value: 'netProceeds',
   },
   {
-    label: "Order Date",
-    value: "createdAt",
-    headerStyle: { textAlign: "center" },
-    dataStyle: { textAlign: "center" },
-  },
-  {
-    label: "Total Amount",
-    value: "totalAmount",
-    headerStyle: { textAlign: "center" },
-    dataStyle: { textAlign: "center" },
+    label: 'Selling Costs',
+    value: 'sellingCosts',
   },
 ];
-export const shipmentStatusOptions = [
+export const valuationsNoRefinanceYear5annualCashFlows = [
   {
-    label: "Pending",
-    value: "pending",
+    label: 'Year',
+    value: 'year',
   },
   {
-    label: "Shipped",
-    value: "shipped",
+    label: 'AUM Fee',
+    value: 'aumFee',
   },
   {
-    label: "Delivered",
-    value: "delivered",
-  },
-];
-export const shipmentTableHeaders = [
-  {
-    label: "Order ID",
-    value: "orderId",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
+    label: 'Cash Flow',
+    value: 'cashFlow',
   },
   {
-    label: "Customer",
-    value: "customer",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
+    label: 'Cash on Cash Return',
+    value: 'cashOnCashReturn',
   },
   {
-    label: "Ordered On",
-    value: "orderDate",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
+    label: 'NOI',
+    value: 'noi',
   },
   {
-    label: "Delivered On",
-    value: "deliveryDate",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
+    label: 'Debt Service',
+    value: 'debtService',
   },
   {
-    label: "Shipment Amount",
-    value: "shipmentAmount",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
-  {
-    label: "Status",
-    value: "status",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
-  {
-    label: "Product Quantity",
-    value: "quantity",
-    headerStyle: {
-      textAlign: "left",
-    },
-    dataStyle: {
-      textAlign: "left",
-    },
-  },
-  {
-    label: "",
-    value: "actions",
+    label: 'Property Management Fee',
+    value: 'propertyManagementFee',
   },
 ];
-export const upsServiceCodes = {
-  "01": "UPS Next Day Air",
-  "02": "UPS 2nd Day Air",
-  "03": "UPS Ground",
-  "07": "UPS Worldwide Express",
-  "08": "UPS Worldwide Expedited",
-  11: "UPS Standard",
-  12: "UPS 3 Day Select",
-  13: "UPS Next Day Air Saver",
-  14: "UPS Next Day Air Early",
-  54: "UPS Worldwide Express Plus",
-  65: "UPS Worldwide Saver",
-};
-export const fedexServiceCodes = {
-  "01": "FedEx Priority Overnight",
-  "03": "FedEx 2Day",
-  "05": "FedEx Express Saver",
-  "06": "FedEx Standard Overnight",
-  13: "FedEx First Overnight",
-  16: "FedEx First Overnight Freight",
-  20: "FedEx International Economy",
-  21: "FedEx International Priority",
-  70: "FedEx 1Day Freight",
-  80: "FedEx 2Day Freight",
-  82: "FedEx 3Day Freight",
-  92: "FedEx Ground",
-};
-export const shipmentDetailsHeaders = [
+export const valuationsNoRefinanceYear7annualCashFlows = [
   {
-    label: "Shipment ID",
-    value: "shipmentId",
+    label: 'Year',
+    value: 'year',
   },
   {
-    label: "Shipment Service",
-    value: "service",
+    label: 'AUM Fee',
+    value: 'aumFee',
   },
   {
-    label: "Shipment Service Code",
-    value: "serviceCode",
+    label: 'Cash Flow',
+    value: 'cashFlow',
   },
   {
-    label: "Price",
-    value: "price",
+    label: 'Cash on Cash Return',
+    value: 'cashOnCashReturn',
   },
   {
-    label: "Shipment Cost",
-    value: "shipmentCost",
+    label: 'NOI',
+    value: 'noi',
   },
   {
-    label: "Status",
-    value: "status",
+    label: 'Debt Service',
+    value: 'debtService',
+  },
+  {
+    label: 'Property Management Fee',
+    value: 'propertyManagementFee',
   },
 ];
-export const shipmentTrackingHeaders = [
+export const valuationsRefinanceYear5_37month = [
   {
-    label: "Tracking Number",
-    value: "trackingNumber",
+    label: 'Year',
+    value: 'year',
   },
   {
-    label: "Shipment Label",
-    value: "shippingLabel",
+    label: 'AUM Fee',
+    value: 'aumFee',
   },
   {
-    label: "Actions",
-    value: "actions",
+    label: 'Cash Flow',
+    value: 'cashFlow',
+  },
+
+  {
+    label: 'NOI',
+    value: 'noi',
+  },
+  {
+    label: 'Debt Service',
+    value: 'debtService',
+  },
+  {
+    label: 'Property Management Fee',
+    value: 'propertyManagementFee',
+  },
+];
+export const valuationsNoiDataHeader = [
+  {
+    label: ' Target Noi ',
+    value: 'targetNoi',
+  },
+  {
+    label: ' Realized Noi',
+    value: 'realizedNoi',
+  },
+];
+
+// view Report
+export const ViewReportTabsOption = [
+  {
+    label: 'Input',
+    value: 'input',
+  },
+  {
+    label: 'Mortgage',
+    value: 'mortgage',
+  },
+  {
+    label: 'Valuation',
+    value: 'valuation',
+  },
+  {
+    label: 'Report',
+    value: 'report',
   },
 ];
