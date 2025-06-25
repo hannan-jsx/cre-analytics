@@ -213,7 +213,10 @@ const AddEditReport = ({ id, setActiveTab }) => {
       refinance_61_term_years: Number(refinance_61_term_years),
     };
     for (let key in params) {
-      if (params[key] === 'number_months_intr_only') {
+      if (
+        params[key] === 'number_months_intr_only' ||
+        params[key] === 'first_month_principal_and_intr_payment'
+      ) {
         if (params[key] === 0) {
           return true;
         }
@@ -436,6 +439,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             placeholder={'Enter asking price'}
             label={"Seller's Asking Price"}
             regexType={'number'}
+            rightIcon={<span>$</span>}
           />
           <Input
             value={offer_perc}
@@ -443,6 +447,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             placeholder={'Enter offer percentage'}
             label={'Anticipated Offer Percentage'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
         </div>
       </div>
@@ -456,6 +461,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             placeholder={'Enter your NOI(Net Operating Income)'}
             label={'Actual NOI (Yearly)'}
             regexType={'number'}
+            rightIcon={<span>$</span>}
           />
           <Input
             value={annual_noi_increase}
@@ -463,6 +469,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             placeholder={'Enter expected annual NOI increase %'}
             label={'NOI Growth Rate (Annual)'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
         </div>
       </div>
@@ -475,13 +482,15 @@ const AddEditReport = ({ id, setActiveTab }) => {
             placeholder={'Enter your LTV'}
             label={'Loan-to-Value Ratio (%)'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={loan_annual_intr}
             setter={setLoanAnnualIntr}
             placeholder={'Enter the expected annual interest rate'}
-            label={'Loan Interest Rate (Annual)'}
+            label={'Loan Interest Rate (Annual) %'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={loan_terms_inyear}
@@ -519,6 +528,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             label={'Transaction Costs (2.5% of Purchase Price)'}
             placeholder={'Calculated Transaction Costs'}
             regexType={'number'}
+            rightIcon={<span>$</span>}
           />
           <Input
             value={reserved_dynamic_field_one}
@@ -526,14 +536,16 @@ const AddEditReport = ({ id, setActiveTab }) => {
             label={'Manual Override of Transaction Costs'}
             placeholder={'Enter your manual override of Transaction Costs'}
             regexType={'number'}
+            rightIcon={<span>$</span>}
           />
           <Input
-            value={reserved_amount}
+            value={'$' + formatNumber(reserved_amount)}
             setter={setDynamicFieldTwo}
             disabled
             label={'Total Reserve Fund (6 Months P&I + 2.5%)'}
             placeholder='Calculated as 6 months P&I payment + 2.5% of purchase price'
             regexType={'number'}
+            rightIcon={<span>$</span>}
           />
           <Input
             value={reserved_dynamic_field_two}
@@ -541,6 +553,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             label={'Manual Override of Reserve Fund'}
             regexType={'number'}
             placeholder='Enter custom reserve fund value (overrides calculated amount)'
+            rightIcon={<span>$</span>}
           />
         </div>
       </div>
@@ -553,6 +566,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             placeholder='Enter the preferred annual return percentage'
             label={'Annual Preferred Return %'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={waterfall_share}
@@ -560,6 +574,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             placeholder='Enter capital gains share after prefs'
             label={'Equity Split After Pref Return (%)'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
         </div>
       </div>
@@ -573,13 +588,16 @@ const AddEditReport = ({ id, setActiveTab }) => {
             placeholder='Enter fee percentage based on total property value'
             label={'Syndicator Origination Fee (%)'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={syndi_aum_ann_fee}
             setter={setSyndiAumAnnFee}
             placeholder='Enter fee percentage based on total property value'
-            label={'Broker Origination Fee (%)'}
+            // label={'Broker Origination Fee (%)'}
+            label={'Syndicator’s AUM fee (annual %)'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <DropDown
             value={dynamic_drop_down_one}
@@ -594,19 +612,13 @@ const AddEditReport = ({ id, setActiveTab }) => {
             label={"Property Manager's Fee (% of Rental Income)"}
             placeholder='Enter fee as % of rental income (NOI ≈ 20% of gross)'
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <DropDown
             value={dynamic_drop_down_two}
             setter={setDynamicDropDownTwo}
             options={options}
             label={'Apply PM Fee Against NOI'}
-            regexType={'number'}
-          />
-          <Input
-            value={syndi_sale_price_fee}
-            setter={setSyndiSalePriceFee}
-            label={'Syndicator’s Sale Commission (%)'}
-            placeholder='Enter fee % based on property sale price'
             regexType={'number'}
           />
         </div>
@@ -621,6 +633,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             placeholder='Enter % for legal and bank fees on sale'
             label={'Sale Transaction Charges (%)'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={realtor_fee}
@@ -628,82 +641,101 @@ const AddEditReport = ({ id, setActiveTab }) => {
             label={'Realtor Commission (%)'}
             placeholder="Enter realtor's fee as a % of sale price"
             regexType={'number'}
+            rightIcon={<span>%</span>}
+          />
+          <Input
+            value={syndi_sale_price_fee}
+            setter={setSyndiSalePriceFee}
+            label={'Syndicator’s Sale Commission (%)'}
+            placeholder='Enter fee % based on property sale price'
+            regexType={'number'}
+            rightIcon={<span>%</span>}
           />
         </div>
       </div>
 
       <div className={classes.input_container}>
-        <h3 className={classes.header}>Yearly Projections</h3>
+        <h3 className={classes.header}>Occupancy Rate</h3>
         <div className={classes.input__wrapper}>
           <Input
             value={occupancy1}
             setter={setOccupancy1}
-            label={'Year 1 Occupancy Rate (%)'}
+            label={'Year 1 (%)'}
             placeholder={'Enter occupancy rate for year 1'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={occupancy2}
             setter={setOccupancy2}
-            label={'Year 2 Occupancy Rate (%)'}
+            label={'Year 2 (%)'}
             placeholder={'Enter occupancy rate for year 2'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={occupancy3}
             setter={setOccupancy3}
-            label={'Year 3 Occupancy Rate (%)'}
+            label={'Year 3 (%)'}
             placeholder={'Enter occupancy rate for year 3'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={occupancy4}
             setter={setOccupancy4}
-            label={'Year 4 Occupancy Rate (%)'}
+            label={'Year 4 (%)'}
             placeholder={'Enter occupancy rate for year 4'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={occupancy5}
             setter={setOccupancy5}
-            label={'Year 5 Occupancy Rate (%)'}
+            label={'Year 5 (%)'}
             placeholder={'Enter occupancy rate for year 5'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={occupancy6}
             setter={setOccupancy6}
-            label={'Year 6 Occupancy Rate (%)'}
+            label={'Year 6 (%)'}
             placeholder={'Enter occupancy rate for year 6'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={occupancy7}
             setter={setOccupancy7}
-            label={'Year 7 Occupancy Rate (%)'}
+            label={'Year 7 (%)'}
             placeholder={'Enter occupancy rate for year 7'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={occupancy8}
             setter={setOccupancy8}
-            label={'Year 8 Occupancy Rate (%)'}
+            label={'Year 8 (%)'}
             placeholder={'Enter occupancy rate for year 8'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={occupancy9}
             setter={setOccupancy9}
-            label={'Year 9 Occupancy Rate (%)'}
+            label={'Year 9 (%)'}
             placeholder={'Enter occupancy rate for year 9'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={occupancy10}
             setter={setOccupancy10}
-            label={'Year 10 Occupancy Rate (%)'}
+            label={'Year 10 (%)'}
             placeholder={'Enter occupancy rate for year 10'}
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
         </div>
       </div>
@@ -718,6 +750,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             placeholder='Enter CAP rate used for purchase valuation'
             disabled
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={year_5_cap_rate}
@@ -725,6 +758,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             label={'CAP Rate at Year 5 (%)'}
             placeholder='Enter CAP rate for property value at Year 5'
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={year_7_cap_rate}
@@ -732,6 +766,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             label={'CAP Rate at Year 7 (%)'}
             placeholder='Enter CAP rate for property value at Year 7'
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={year_10_cap_rate}
@@ -739,6 +774,7 @@ const AddEditReport = ({ id, setActiveTab }) => {
             label={'CAP Rate at Year 10 (%)'}
             placeholder='Enter CAP rate for property value at Year 10'
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
         </div>
       </div>
@@ -749,44 +785,50 @@ const AddEditReport = ({ id, setActiveTab }) => {
           <Input
             value={refinance_37_rate}
             setter={setRefinance37rate}
-            label={'Refinance Rate (Month 37)'}
+            label={'Refinance Rate (Month 37) %'}
             placeholder='Enter refinance interest rate at month 37'
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={refinance_37_term_years}
             setter={setRefinance37Term}
-            label={'Refinance Term (Month 37)'}
+            label={'Refinance Term (Month 37) %'}
             placeholder='Enter the term (in years) for the refinance loan at month 37'
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={refinance_49_rate}
             setter={setRefinance49rate}
-            label={'Refinance Rate (Month 49)'}
+            label={'Refinance Rate (Month 49) %'}
             placeholder='Enter refinance interest rate at month 49'
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={refinance_49_term_years}
             setter={setRefinance49Term}
-            label={'Refinance Term (Month 49)'}
+            label={'Refinance Term (Month 49) %'}
             placeholder='Enter the term (in years) for the refinance loan at month 49'
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={refinance_61_rate}
             setter={setRefinance61rate}
-            label={'Refinance Rate (Month 61)'}
+            label={'Refinance Rate (Month 61) %'}
             placeholder='Enter refinance interest rate at month 61'
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
           <Input
             value={refinance_61_term_years}
             setter={setRefinance61Term}
-            label={'Refinance Term (Month 61)'}
+            label={'Refinance Term (Month 61) %'}
             placeholder='Enter the term (in years) for the refinance loan at month 61'
             regexType={'number'}
+            rightIcon={<span>%</span>}
           />
         </div>
       </div>

@@ -1,15 +1,18 @@
 import { Get } from '@/Axios/AxiosFunctions';
 import { Button } from '@/components/Core/Button';
+import TableStructure from '@/components/Core/TableStructure';
 import RenderField from '@/components/RenderField';
 import { BaseURL } from '@/config/apiUrl';
+import { generateReportSyndicatorsDealValuesTable } from '@/data/data';
 import { formatNumber } from '@/Helper/HelperFunction';
 import { Skeleton } from '@mui/material';
-import * as html2canvas from 'html2canvas'; // ✅ always safe
+import * as html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import classes from './Report.module.css';
-import TableStructure from '@/components/Core/TableStructure';
+import { SidebarLogo2 } from '@/constant/imagePath';
+import { refinanceTypes } from '@/constant/constants';
 
 const Report = ({ id }) => {
   const [data, setData] = useState(null);
@@ -18,7 +21,7 @@ const Report = ({ id }) => {
   const contentRef = useRef(null);
 
   const getData = async () => {
-    setLoading(true);
+    setLoading('get-data');
     const apiUrl = BaseURL(`analytics/report/${id}`);
     const response = await Get(apiUrl, access_token);
     if (response !== undefined) {
@@ -32,6 +35,10 @@ const Report = ({ id }) => {
   }, []);
 
   const downloadPdf = async () => {
+    if (!contentRef.current) {
+      return;
+    }
+    setLoading('download');
     const input = contentRef.current;
     const canvas = await html2canvas(input, { scale: 2 });
     const imgData = canvas.toDataURL('image/png');
@@ -58,20 +65,21 @@ const Report = ({ id }) => {
     }
 
     pdf.save('Investment-Summary.pdf');
+    setLoading(false);
   };
 
   return (
     <div>
       <div className={classes.download__btn}>
         <Button
-          label={'Download Report'}
+          label={loading === 'download' ? 'Downloading...' : 'Download Report'}
           onClick={downloadPdf}
           disabled={loading || !data}
         />
       </div>
 
       <div className={classes.mortgage__wrapper} ref={contentRef}>
-        {loading ? (
+        {loading === 'get-data' ? (
           <div className={classes.payment__wrapper}>
             <Skeleton
               variant='rounded'
@@ -100,6 +108,7 @@ const Report = ({ id }) => {
           </div>
         ) : (
           <div className={classes.payment__wrapper}>
+            <img className={classes.logo} src={SidebarLogo2} alt='logo' />
             <h3 className={classes.payment__heading}>Report Details</h3>
             <div className={classes.renderFields}>
               <div className={classes.fullWidth}>
@@ -191,7 +200,11 @@ const Report = ({ id }) => {
 
                 <div className={classes.renderFields}>
                   <RenderField
-                    label={'Best Annualized Return (%) (No Refinance Year 5)'}
+                    label={`Best Annualized Return (%) (${
+                      refinanceTypes[
+                        data?.investmentInsights?.bestAnnualizedReturn?.key
+                      ]
+                    })`}
                     value={
                       data?.investmentInsights?.bestAnnualizedReturn?.value
                         ? formatNumber(
@@ -202,31 +215,11 @@ const Report = ({ id }) => {
                     }
                   />
                   <RenderField
-                    label={
-                      'Best Cash on Cash (%) (Refinance Year 10 month 61) '
-                    }
-                    value={
-                      data?.investmentInsights?.bestCashOnCash?.value
-                        ? formatNumber(
-                            data?.investmentInsights?.bestCashOnCash?.value
-                          ) + '%'
-                        : 'N/A'
-                    }
-                  />
-                  <RenderField
-                    label={'Best Irr (%) (Refinance Year 10) '}
-                    value={
-                      data?.investmentInsights?.bestIrr?.value
-                        ? formatNumber(
-                            data?.investmentInsights?.bestIrr?.value
-                          ) + '%'
-                        : 'N/A'
-                    }
-                  />
-                  <RenderField
-                    label={
-                      'Worst Annualized Return (Refinance Year 10 month 37) '
-                    }
+                    label={`Worst Annualized Return (%) (${
+                      refinanceTypes[
+                        data?.investmentInsights?.worstAnnualizedReturn?.key
+                      ]
+                    })`}
                     value={
                       data?.investmentInsights?.worstAnnualizedReturn?.value
                         ? '$' +
@@ -238,7 +231,25 @@ const Report = ({ id }) => {
                     }
                   />
                   <RenderField
-                    label={'Worst Cash on Cash (%) (Refinance Year 5) '}
+                    label={`Best Cash on Cash (%) (${
+                      refinanceTypes[
+                        data?.investmentInsights?.bestCashOnCash?.key
+                      ]
+                    })`}
+                    value={
+                      data?.investmentInsights?.bestCashOnCash?.value
+                        ? formatNumber(
+                            data?.investmentInsights?.bestCashOnCash?.value
+                          ) + '%'
+                        : 'N/A'
+                    }
+                  />
+                  <RenderField
+                    label={`Worst Cash on Cash (%) (${
+                      refinanceTypes[
+                        data?.investmentInsights?.worstCashOnCash?.key
+                      ]
+                    })`}
                     value={
                       data?.investmentInsights?.worstCashOnCash?.value
                         ? formatNumber(
@@ -248,7 +259,22 @@ const Report = ({ id }) => {
                     }
                   />
                   <RenderField
-                    label={'Worst Irr (%) (Refinance Year 5 month 37) '}
+                    label={`Best Irr (%) (${
+                      refinanceTypes[data?.investmentInsights?.bestIrr?.key]
+                    })`}
+                    value={
+                      data?.investmentInsights?.bestIrr?.value
+                        ? formatNumber(
+                            data?.investmentInsights?.bestIrr?.value
+                          ) + '%'
+                        : 'N/A'
+                    }
+                  />
+
+                  <RenderField
+                    label={`Worst Irr (%) (${
+                      refinanceTypes[data?.investmentInsights?.worstIrr?.key]
+                    })`}
                     value={
                       data?.investmentInsights?.worstIrr?.value
                         ? formatNumber(
@@ -262,6 +288,7 @@ const Report = ({ id }) => {
             )}
 
             {/* Property Manager Fee List */}
+
             {data?.syndicatorsDealData?.propertyManagerValues?.length > 0 && (
               <div style={{ marginTop: '2rem' }}>
                 <h3 className={classes.payment__heading}>
@@ -280,14 +307,13 @@ const Report = ({ id }) => {
                       />
                     )
                   )}
-                  {/* </div> */}
                 </div>
               </div>
             )}
 
             <TableStructure
               headerTitle={'Syndicator Deal Values'}
-              tableHeaders={syndicatorsDealValuesTable}
+              tableHeaders={generateReportSyndicatorsDealValuesTable}
               tableContent={data?.syndicatorsDealData?.syndicatorsDealValues?.map(
                 (item) => ({
                   year: (
@@ -325,33 +351,3 @@ const Report = ({ id }) => {
 };
 
 export default Report;
-const syndicatorsDealValuesTable = [
-  {
-    label: ' Year',
-    value: 'year',
-  },
-  {
-    label: ' Anualized Total Value',
-    value: 'annualizedTotalValue',
-  },
-  {
-    label: ' Syndicator Acquisation',
-    value: 'syndicatorAcquisation',
-  },
-  {
-    label: ' Syndication Exit',
-    value: 'syndicationExit',
-  },
-  {
-    label: ' AUM Fee',
-    value: 'syndicatorAumFee',
-  },
-  {
-    label: ' Gain Share',
-    value: 'gainShare',
-  },
-  {
-    label: '  Total Value ',
-    value: 'totalValue',
-  },
-];
