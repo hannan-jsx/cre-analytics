@@ -1,16 +1,16 @@
-import { Get, Post } from '@/Axios/AxiosFunctions';
+import { Get } from '@/Axios/AxiosFunctions';
 import TableStructure from '@/components/Core/TableStructure';
 import RenderField from '@/components/RenderField';
 import { BaseURL } from '@/config/apiUrl';
+import { mortgageTableHeader2, mortgageTableHeaders } from '@/data/data';
+import { formatNumber } from '@/Helper/HelperFunction';
 import { Skeleton } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import classes from './Mortgage.module.css';
-import { formatNumber } from '@/Helper/HelperFunction';
 import { useLocation } from 'react-router-dom';
+import classes from './Mortgage.module.css';
 const Mortgage = ({ id }) => {
   const location = useLocation();
-
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const { access_token } = useSelector((state) => state?.authReducer);
@@ -87,7 +87,7 @@ const Mortgage = ({ id }) => {
             />
             <RenderField
               label={'Total Payments'}
-              value={'$' + formatNumber(data?.totalPayments)}
+              value={formatNumber(data?.totalPayments)}
             />
           </div>
         </div>
@@ -96,7 +96,7 @@ const Mortgage = ({ id }) => {
       <TableStructure
         headerTitle={'Refinance Calculation'}
         isLoading={loading}
-        tableHeaders={tableHeaders}
+        tableHeaders={mortgageTableHeaders}
         tableContent={data?.refinanceCalculation?.map((item) => ({
           ...item,
           month: (
@@ -119,7 +119,7 @@ const Mortgage = ({ id }) => {
         headerTitle={'Primary and Refinance Data'}
         isLoading={loading}
         page={false}
-        tableHeaders={tableHeader2}
+        tableHeaders={mortgageTableHeader2}
         tableContent={result.map((item) => ({
           ...item,
           sno: (
@@ -146,33 +146,3 @@ const Mortgage = ({ id }) => {
 };
 
 export default Mortgage;
-
-const tableHeaders = [
-  { label: 'Month', value: 'month' },
-  { label: 'Mortgage', value: 'mortgage' },
-  { label: 'Value', value: 'value' },
-  { label: 'Capital Lift', value: 'capitalLift' },
-  { label: 'Cap Rate', value: 'capRate' },
-  { label: 'Fees & Costs', value: 'feesAndCosts' },
-  { label: 'Refinance PMT', value: 'refinancePMT' },
-];
-
-const tableHeader2 = [
-  {
-    label: '',
-    value: 'sno',
-    dataStyle: {
-      width: '10%',
-    },
-  },
-  { label: 'Year1', value: 'year1' },
-  { label: 'Year2', value: 'year2' },
-  { label: 'Year3', value: 'year3' },
-  { label: 'Year4', value: 'year4' },
-  { label: 'Year5', value: 'year5' },
-  { label: 'Year6', value: 'year6' },
-  { label: 'Year7', value: 'year7' },
-  { label: 'Year8', value: 'year8' },
-  { label: 'Year9', value: 'year9' },
-  { label: 'Year10', value: 'year10' },
-];

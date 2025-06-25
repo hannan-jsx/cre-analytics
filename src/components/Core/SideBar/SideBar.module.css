@@ -8,7 +8,7 @@
   background-color: var(--white-color);
   background-size: cover;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgb(0 0 0 / 5%);
+  /* box-shadow: 0 0 10px rgb(0 0 0 / 5%); */
   position: relative;
 }
 .logoContainer {
