@@ -213,14 +213,10 @@ const AddEditReport = ({ id, setActiveTab }) => {
       refinance_61_term_years: Number(refinance_61_term_years),
     };
     for (let key in params) {
-      if (
-        params[key] === 'number_months_intr_only' ||
-        params[key] === 'first_month_principal_and_intr_payment'
-      ) {
-        if (params[key] === 0) {
-          return true;
-        }
+      if (key === 'number_months_intr_only' || key === 'realtor_fee') {
+        continue;
       }
+
       if (!params[key]) {
         RenderToast({
           type: 'error',
